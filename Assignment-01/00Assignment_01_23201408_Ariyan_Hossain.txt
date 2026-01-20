@@ -1,0 +1,649 @@
+// Task-01
+
+import java.util.Scanner;
+public class ASS_01_HW_001{
+  public static void main(String[]args){
+    Scanner sc=new Scanner(System.in);
+    int POcount=0;
+    int sum=0, min=10000000, max=-99999; 
+    double avg=0;
+    for(int i=1; i<=10; i++){
+      int num=sc.nextInt();
+      if(num%2!=0 && num>0){
+        POcount++;
+        sum+=num;
+        if(num<min){
+          min=num;
+        }
+        if(num>max){
+          max=num;
+        }
+      }
+    }
+    avg=(double)sum/POcount;
+    if(POcount>0){
+      System.out.println("Sum:"+sum);
+      System.out.println("Minimum:"+min);
+      System.out.println("Maximu:"+max);
+      System.out.println("Average:"+avg);
+    }
+    else{
+      System.out.println("No positive Odd numbers found");
+    }
+  }
+}
+
+
+
+        // Task-02
+
+
+import java.util.Scanner;
+public class ASS_01_HW_002{
+  public static void main(String[]args){
+    Scanner sc=new Scanner(System.in);
+    int m=sc.nextInt();
+    int n=sc.nextInt();
+    if(m>n){            //swapping if the frst inpt is bigger
+      int temp=m;
+      m=n;
+      n=temp;
+    }
+    int p_count=0;
+    for(int i=m; i<=n; i++){
+      int div_count=0;
+      for(int j=1; j<=i; j++){
+        if(i%j==0){
+          div_count++;
+        }
+      }
+      if(div_count==2){
+        p_count++;
+      }
+    }
+    System.out.println("There are "+p_count+" prime numbers between "+m +" and "+n);
+  }
+}
+
+
+        // Task-03
+
+
+import java.util.Scanner;
+public class ASS_01_HW_003{
+  public static void main(String[]args){
+    Scanner sc=new Scanner(System.in);
+    String s1=sc.nextLine();
+    String s2=sc.nextLine();
+    String res=s1+" "+s2;
+    int sum=0;
+    for(int i=0; i<res.length(); i++){
+      int ascii=res.charAt(i);
+      if(ascii!=32){
+        if((ascii>=65 && ascii<=90) || (ascii>=97 && ascii<=122)){
+          
+          sum+=res.charAt(i);
+        }
+      }
+    }
+    System.out.println(res);
+    System.out.println(sum);
+  }
+}
+
+
+
+
+// Task-04
+
+import java.util.Scanner;
+public class ASS_01_HW_004{
+  public static void main(String[]args){
+    Scanner sc=new Scanner(System.in);
+    String s1=sc.nextLine();
+    String res="";
+    for(int i=0; i<s1.length(); i++){
+      if(s1.charAt(i)==97){
+        res+='z';
+      }
+      else{
+        res+=(char)(s1.charAt(i)-1);
+      }
+    }
+    System.out.println(res);
+  }
+}
+
+
+
+// Task-05
+
+
+
+import java.util.Scanner;
+public class ASS_01_HW_005{
+  public static void main(String[]args){
+    Scanner sc=new Scanner(System.in);
+    System.out.println("Enter the length of the array:");
+    int n=sc.nextInt();
+    int arr[]=new int[n];
+    for(int i=0; i<arr.length; i++){
+      arr[i]=sc.nextInt();
+    }
+    for(int i=0; i<arr.length; i++){
+      System.out.print(arr[i]+" ");
+    }
+    System.out.println();
+    int p1=0, p2=arr.length-1;
+    for(int i=0; i<arr.length/2; i++){   //Traversing the loop half the size of arr. does the job for both even & odd
+      if(p1!=p2){
+        int temp=arr[p1];
+        arr[p1]=arr[p2];
+        arr[p2]=temp;
+        p1++;
+        p2--;
+      }
+    }
+    System.out.println("Reversed Array:");
+    for(int i=0; i<arr.length; i++){
+      System.out.print(arr[i]+" ");
+    }
+  }
+}
+
+
+    
+// Task-06
+
+
+import java.util.Scanner;
+public class ASS_01_HW_006{
+  public static void main(String[]args){
+    Scanner sc=new Scanner(System.in);
+    System.out.println("N=");
+    int n=sc.nextInt();
+    int arr[]=new int [n];
+    for(int i=0; i<arr.length; i++){
+      arr[i]=sc.nextInt();
+    }
+     
+    for(int i=0; i<arr.length; i++){
+      int count=0;
+      boolean flag=true;
+      for(int j=0; j<arr.length; j++){
+        if(arr[i]==arr[j]){
+          count++;
+        }
+      }
+      for(int k=0; k<i; k++){   // I used this loop & flag for avoiding printing the same arr[i] again
+        if(arr[i]==arr[k]){
+          flag=false;
+          break;
+        }
+      }
+      if(flag){
+        System.out.println(arr[i]+" - "+count+" times");
+      }
+    }
+  }
+}
+
+
+// Task-07
+
+
+import java.util.Arrays;
+import java.util.Scanner;
+public class ASS_01_HW_007{
+  public static void main(String[]args){
+    Scanner sc=new Scanner(System.in);
+    System.out.println("N=");
+    int n=sc.nextInt();
+    double arr[]= new double[n];
+    for(int i=0; i<arr.length; i++){
+      arr[i]=sc.nextDouble();
+    }
+    int count=0;
+    for(int i=0; i<arr.length-1; i++){     //ran this loop for counting duplicate elmnts.
+      if(arr[i]==arr[i+1]){
+        count++;
+      }
+    }
+    for(int i=1; i<arr.length; i++){
+      if(i>1){
+        if(arr[i]==arr[i-1] || (arr[i]==arr[i-1] && arr[i]==arr[i-2])){
+          arr[i]=0;
+        }
+      }
+      else{
+        if(arr[i]==arr[i-1]){
+          arr[i]=0;
+        }
+      }
+    }
+    double arr1[]=new double [n-count];
+    int index=0;
+    
+    for(int i=0; i<arr.length; i++){
+      if(arr[i]!=0 && index<arr1.length){
+        arr1[index]=arr[i];
+        index++;
+      }
+    }
+    System.out.print("New Array: ");
+    for(int i=0; i<arr1.length; i++){
+      System.out.print(arr1[i]+" ");
+    }
+    System.out.println("\nRemoved Elements: "+count);
+  }
+}
+
+
+
+// Task-08
+
+
+import java.util.Arrays;
+import java.util.Scanner;
+public class ASS_01_HW_008{
+  public static void main(String[]args){
+    Scanner sc=new Scanner(System.in);
+    System.out.println("row:");
+    int row=sc.nextInt();
+    System.out.println("Column:");
+     int col=sc.nextInt();
+    int TwoD_arr[][]=new int [row][col];
+    for(int i=0; i<row; i++){
+      for(int j=0; j<col; j++){
+        TwoD_arr[i][j]=sc.nextInt();
+      }
+    }
+    System.out.println("2D Array: ");
+    for(int i=0; i<row; i++){
+      for(int j=0; j<col; j++){
+        System.out.print(TwoD_arr[i][j]+ " ");
+      }
+      System.out.println();
+    }
+    System.out.println("\n1D Array: ");
+    for(int i=0; i<row; i++){
+      for(int j=0; j<col; j++){
+        System.out.print(TwoD_arr[i][j]+ " ");
+      }
+    }
+        
+      
+  }
+}
+
+
+
+
+// Task-09
+
+
+import java.util.Scanner;
+public class ASS_01_HW_009{
+  public static void main(String[]args){
+    Scanner sc=new Scanner(System.in);
+    int [ ] [ ] A = {{1,  0,  0,  1},
+                     {0,  1,  0,  0},
+                     {1,  0,  1,  0},
+                     {0,  1,  0,  1}};
+//    int [ ] [ ] A = {{1, 0, 0},
+//                     {0, 1, 0},
+//                     {0, 0, 1}};
+
+    int matrix_sum=0, Diagonal_sum=0;
+    for(int i=0; i<A.length; i++){
+      for(int j=0; j<A[0].length; j++){
+        matrix_sum+=A[i][j];
+        if(i==j && A[i][j]==1){
+          Diagonal_sum+=A[i][i];
+        }
+      }
+    }
+    System.out.println(matrix_sum+"   "+Diagonal_sum);
+    if(Diagonal_sum==A.length && Diagonal_sum==matrix_sum){
+      System.out.println("Identity Matrix");
+    }
+    else{
+      System.out.println("Not an identity matrix");
+    }
+  }
+}
+
+
+
+//Task-10  Treasure Hunt
+    
+
+
+import java.util.Scanner;
+public class TreasureHunt{
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int [][] arr2D = {{0, 0, 10, 0, -1},
+                      {0, -1, 0, 0, -1},
+                      {-1, 0, -1, 0, 0},
+                      {0, -1, 7, 0, -1},
+                      {0, -1, 0, -1, 0}
+    };
+    System.out.println("Initial Map:");
+    printMap(arr2D);
+    int row = arr2D.length;
+    int col = arr2D[0].length;
+    int row_pos = -1, col_pos = -1;
+    //To-do: find out the position of the player
+    for(int i=0; i<row; i++){
+      for(int j=0; j<col; j++){
+        if(arr2D[i][j]==7){
+          row_pos=i;
+          col_pos=j;
+        }
+      }
+    }
+    
+    int turns = 5;
+    while (turns > 0) {
+      int new_row = row_pos, new_col = col_pos;
+      System.out.printf("Enter move %d: ",(6-turns));
+      String inp = sc.nextLine();
+      /*To-do: Based on the input update the player position and check if
+       * 1. the player fell out of the grid
+       * 2. player stepped on mine
+       * 3. player found the treasure
+       * otheriwse, update the player position */
+      if(inp.equals("RIGHT")){
+        new_col++;
+      }
+      else if(inp.equals("LEFT")){
+        new_col--;
+      }
+      else if(inp.equals("UP")){
+        new_row--;
+      }
+      else if(inp.equals("DOWN")){
+        new_row++;
+      }
+      else{
+        System.out.println("Invalid Input");
+      }
+
+      if(new_row<0 || new_col<0 || new_row>arr2D.length-1 || new_col>arr2D[0].length-1){
+        System.out.println("The Player fell out of the grid\nGame OVER!!!");
+        break;
+      }
+      int target= arr2D[new_row][new_col];
+      
+      arr2D[row_pos][col_pos] = 0;            //Resetting the open space and player's position;
+      arr2D[new_row][new_col] = 7;
+      
+      
+      row_pos = new_row;
+      col_pos = new_col;
+      
+      
+      if(target==10){
+        System.out.println("Treasure found. You win!\nFinal state:");
+        printMap(arr2D);
+        break;
+      }
+      else if (target == -1) {
+        System.out.println("Player stepped on mine. Game Over!");
+        break;
+      }
+
+      System.out.println("Current state:");
+      printMap(arr2D);
+      turns--;
+    }
+    if (turns == 0) {
+      System.out.println("More than 05 Attempts!\nGame Over!");
+    }
+  }
+  
+  public static void printMap(int[][] arr) { 
+    // To-do: print the 2D grid
+    for(int i=0; i<arr.length; i++){
+      for(int j=0; j<arr[0].length; j++){
+        System.out.print(arr[i][j]+" ");
+      }
+      System.out.println();
+    }
+  }
+}
+
+
+
+
+// ASS_01_ungraded_Task_01
+
+import java.util.Scanner;
+public class ASS_01_HW_ungraded_001{
+  public static void main(String[]args){
+    Scanner sc=new Scanner(System.in);
+    System.out.println("N=");
+    int n=sc.nextInt();
+    int arr[]=new int [n];
+    for(int i=0; i<arr.length; i++){
+      arr[i]=sc.nextInt();
+    }
+    System.out.println("Input array: ");
+    for(int i=0; i<arr.length; i++){
+      System.out.print(arr[i]+" ");
+    }
+    System.out.println("\nRemove Element=");
+    int element=sc.nextInt();
+    int arr1[]=new int[n-1];
+    boolean flag=false;
+    int index=0;
+    for(int i=0; i<arr.length; i++){
+      if(arr[i]!=element && index<arr.length-1){      // if index>arr.length-1; then arr1[i]=goes out of bound!
+        arr1[index]=arr[i];
+        index++;
+      }
+      if(arr[i]==element){                        // if the element is found we have to flag it;
+        flag=true;
+      }
+    }
+    if(flag){
+      System.out.println("New Array:");
+      for(int i=0; i<arr1.length; i++){
+        System.out.print(arr1[i]+" ");
+      }
+    }
+    else{
+      System.out.println("Elements not found");
+    }
+  }
+}    
+
+
+
+// ASS_01_ungraded_Task_02
+
+import java.util.Scanner;
+public class ASS_01_HW_ungraded_002{
+  public static void main(String[]args){
+    Scanner sc=new Scanner(System.in);
+    int arr[]=new int[5];
+    for(int i=0; i<arr.length; i++){
+      arr[i]=sc.nextInt();
+    }
+    int min=arr[0], max=arr[0];
+    for(int i=0; i<arr.length; i++){
+      if(arr[i]<min){
+        min=arr[i];
+      }
+      if(arr[i]>max){
+        max=arr[i];
+      }
+    }
+    for(int i=0; i<arr.length; i++){
+      if(arr[i]==max){
+        System.out.println("The largest number "+max+" was found at location "+i);
+      }
+      if(arr[i]==min){
+        System.out.println("The smallest number "+min+" was found at location "+i);
+      }
+    }
+  }
+}
+
+
+
+// ASS_01_ungraded_Task_03
+
+import java.util.Scanner;
+public class ASS_01_HW_ungraded_003{
+  public static void main(String[]args){
+    Scanner sc=new Scanner(System.in);
+    System.out.println("N=");
+    int n=sc.nextInt();
+    int arr[]=new int [n];
+    for(int i=0; i<arr.length; i++){
+      arr[i]=sc.nextInt();
+    }
+                             // First we need to sort the array in increasing;
+    for(int i=0; i<arr.length-1; i++){
+      for(int j=0; j<arr.length-i-1; j++){
+        if(arr[j]>arr[j+1]){
+          int temp=arr[j];
+          arr[j]=arr[j+1];
+          arr[j+1]=temp;
+        }
+      }
+    }
+    float median=0;
+    if(arr.length%2!=0){
+      median=arr[arr.length/2];
+    }
+    else{
+      median=(arr[arr.length/2]+arr[(arr.length/2)-1])/2;
+    }
+    System.out.println("The Median is "+median);
+  }
+}
+    
+    
+    
+    
+// ASS_01_ungraded_Task_04
+
+import java.util.Scanner;
+public class ASS_01_HW_ungraded_004{
+  public static void main(String[]args){
+    Scanner sc=new Scanner(System.in);
+    int [][] A = {{4, 5, 7},
+                  {0, 3, -2},
+                  {4, 1, -4},
+                  {5, 10, 1}};
+//    int [ ] [ ] A = {{1, 2, 4},
+//                     {5, 7, 2}};
+
+    int k=sc.nextInt();
+    for(int i=0; i<A.length; i++){
+      for(int j=0; j<A[0].length; j++){
+        A[i][j]=k*A[i][j];
+      }
+    }
+    for(int i=0; i<A.length; i++){
+      for(int j=0; j<A[0].length; j++){
+        System.out.print(A[i][j]+" ");
+      }
+      System.out.println();
+    }
+  }
+}
+
+
+
+
+// ASS_01_ungraded_Task_05
+
+import java.util.Scanner;
+public class ASS_01_HW_ungraded_005{
+  public static void main(String[]args){
+    Scanner sc=new Scanner(System.in);
+    System.out.println("M=");
+    int m=sc.nextInt();
+    System.out.println("N=");
+    int n=sc.nextInt();
+    int matrix[][]=new int[m][n];
+    for(int i=0; i<m; i++){
+      for(int j=0; j<n; j++){
+        matrix[i][j]=sc.nextInt();
+      }
+    }
+    System.out.println("Matrix A");
+    for(int i=0; i<m; i++){
+      for(int j=0; j<n; j++){
+        System.out.print(matrix[i][j]+" ");
+      }
+      System.out.println();
+    }
+    System.out.println("\nTranspose A");        // In Transpose Matrix rows & columns are exchanged;
+    for(int i=0; i<n; i++){
+      for(int j=0; j<m; j++){
+        System.out.print(matrix[j][i]+" ");      //  rows & columns are exchanged;
+      }
+      System.out.println();
+    }
+  }
+}
+    
+    
+    
+    
+    
+        
+    
+    
+    
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

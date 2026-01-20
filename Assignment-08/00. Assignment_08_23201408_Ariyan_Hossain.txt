@@ -1,0 +1,491 @@
+                                         //Task-01 
+
+public class BBAStudent extends Student{
+  
+  public BBAStudent(){
+    
+    this("Default");
+  }
+  
+  public BBAStudent(String n){
+    super();
+    super.setName(n);
+    super.setDepartment("BBA");
+  }
+  
+}
+
+
+
+                                             //Task-02 
+
+
+public class CheckingAccount extends Account{
+  
+  static int count;
+  
+  public CheckingAccount(){
+    
+    super(0.0);
+    count++;
+  }
+  
+  public CheckingAccount(double b){
+    
+    super(b);
+    count++;
+  }
+  
+}
+
+
+
+
+                                         //Task-03 
+
+public class Dog extends Animal{
+  
+  String type;       //Breed;
+  
+  public Dog(String Name, int Age, String Color, String Type){
+    
+    super(Name,Age,Color);
+    type=Type;
+  }
+  
+  public String info(){
+    
+    return super.info() +"Breed: "+type;
+  }
+  
+  public void makeSound(){
+    System.out.println(color+" color "+ name+" is barking");
+  }
+  
+}
+
+
+
+
+public class Cat extends Animal{
+  
+  String type;       
+  
+  public Cat(String Name, int Age, String Color, String Type){
+    
+    super(Name,Age,Color);
+    type=Type;
+  }
+  
+  public String info(){
+    
+    return super.info() +"Breed: "+type;
+  }
+  
+  public void makeSound(){
+    System.out.println(color+" color "+ name+" is meowing");
+  }
+  
+}
+
+
+
+
+
+                        //Task-04
+
+
+public class Vehicle2010 extends Vehicle {
+  
+  public Vehicle2010(){                        //In the tester class toString() method has been used to convert objects according to desire!
+    super();                                   // From: Location of objects-------> Printing Statements.
+  }
+  
+  public void moveLowerLeft(){
+    moveDown();
+    moveLeft();
+  }
+  
+  public void moveLowerRight(){
+    moveDown();
+    moveRight();
+  }
+  
+  public void moveUpperLeft(){          
+    moveUp();
+    moveLeft();
+  }
+  
+  public void moveUpperRight(){
+    moveUp();
+    moveRight();
+  }
+  
+}
+
+  
+
+
+                                    //Task-05  
+
+
+public class ComplexNumber extends RealNumber{
+  
+  double imaginary;
+  
+  public ComplexNumber(){
+    this(1,1);
+  }
+  
+  public ComplexNumber( double r, double i){
+    
+    super(r);
+    imaginary=i;
+  }
+  
+  public String toString(){
+    
+    return super.toString() +"\nImaginaryPart: "+imaginary;
+  }
+  
+}
+
+
+
+
+
+                                         //Task-06
+
+
+public class Developer extends Employee{
+  
+  String language;
+  double salary;
+  
+  public Developer(String name, double base, int hour, String lang){
+    
+    super(name, base, hour);
+    language=lang;
+  }
+  
+  public void calculateSalary(){
+    
+    if(language.equals("Java")){
+      
+      salary= super.getBaseSalary() + 700;
+    }
+    else{
+      salary=super.getBaseSalary();
+    }
+  }
+  
+  public void displayInfo(){
+    super.displayInfo();
+    System.out.println("Language: "+language+"\nFinal Salary: $"+salary);
+  }
+  
+}
+
+
+
+
+
+public class Manager extends Employee{
+  
+  double bonus;
+  double salary;
+  
+  public Manager(String name, double base, int hour, double bonus){
+    
+    super(name, base, hour);
+    this.bonus=bonus;
+  }
+  
+  public void calculateSalary(){
+    double bonus=0;
+    
+    if(getHoursWorked() >40){
+      bonus= getBaseSalary() * (this.bonus/100);
+      salary= getBaseSalary() + bonus;
+    }
+    else{
+      salary= getBaseSalary();
+    }
+  }
+  
+  public void requestIncrement(int add){
+    
+    if( getHoursWorked()>100){
+      
+      setBaseSalary( getBaseSalary() + add);
+      
+      System.out.println("$"+add+" Increment approved.");
+    }
+    else if(getHoursWorked()>80){
+      
+      setBaseSalary( getBaseSalary() + (add/2));
+      
+      System.out.println("$"+(add/2)+" Increment approved.");
+    }
+    else{
+      System.out.println("Increment denied.");
+    }
+  }
+  
+  public void displayInfo(){
+    super.displayInfo();
+    System.out.println("Bonus: "+bonus+" %\nFinal Salary: $"+salary);
+  }
+  
+}
+
+
+
+
+
+                                       //Task-07
+
+
+public class CinemexTicket extends MovieTicket{
+  
+  private static int total;
+  String genre;
+  boolean paid;
+  int id;
+  
+  public CinemexTicket(String movie, String time, String type, String date){
+    
+    super(movie, date, time, 0);
+    genre=type;
+    
+    seat=seatTypes[0];             // When Seat Type is not passed, we'll assume it too be Regular;
+    setPrice(seatPrices[0]);
+    id= ++total;
+    
+  }
+  
+  public CinemexTicket(String movie, String time, String type, String date, String seat){
+    
+    super(movie, date, time, 0);
+    genre=type;
+    id= ++total;
+    this.seat=seat;
+    
+    for(int i=0; i<seatTypes.length; i++){         //For finding the SeatPrice for the SeatType;
+      if(seat.equals(seatTypes[i])){
+        setPrice( seatPrices[i] );
+        break;
+      }
+    }
+  }
+  
+  public void calculateTicketPrice(){
+    
+    String input[]= showtime.split(":");
+    String input1=input[0];
+    int result=Integer.parseInt(input1);
+    
+    if(result>=18 && result<=23){
+      
+      setPrice( getPrice() + getPrice()*(15/100.0));        // 100.0 bcz otherwise it excludes the decimal points if we do 15/100;
+    }
+    System.out.println("Ticket price is calculated successfully.");
+  }
+  
+  public String confirmPayment(){
+    
+    if(!paid){
+      paid=true;
+      
+      return "Payment Successful.";
+    }
+    else{
+      return "Ticket price is already paid!";
+    }
+  }
+  
+  
+  public static int getTotalTickets(){                      //Static Method;
+    return total;
+  }
+  
+  public String toString(){
+    
+    System.out.println("Ticket ID: "+ getMovie()+"-"+ seat.charAt(0)+"-"+id);
+    
+    System.out.println(super.toString());            
+    
+    System.out.println("Genre: "+genre+"\nSeat Type: "+seat+"\nPrice(tk): "+getPrice());
+    
+    if(paid){
+      return "Status: Paid";
+    }
+    else{
+      return "Status: Not Paid";
+    }
+  }
+  
+  
+}
+
+
+
+
+
+                                                  //Task-08
+
+
+
+public class KKTea extends Tea{
+  
+  int bags;
+  int weight;
+  static int total;
+  static int regularCount;
+  static int flavourCount;
+  
+  public KKTea(int p, int b){
+    
+    super("Regular", p);
+    bags=b;
+    weight=2*bags;
+  }
+  
+  public KKTea(String n, int p, int b){
+    
+    super(n,p);
+    bags=b;
+    weight=2*bags;
+  }
+  
+  public void productDetail(){
+    
+    System.out.println("Name: KK "+name+" Tea, Price: "+price+"\nStatus: "+status+"\nWeight: "+weight+", Tea Bags: "+bags);
+    
+  }
+  
+  public static void totalSales(){
+    
+    if(flavourCount==0){
+      System.out.println("Total Sales: "+total+"\nKK Regular Tea: "+regularCount);
+    }
+    else{
+      System.out.println("Total Sales: "+total+"\nKK Regular Tea: "+regularCount+"\nKK Flavoured Tea: "+flavourCount);
+    }
+  }
+  
+  public static void updateSoldStatusRegular(KKTea tea){
+    total++;
+    regularCount++;
+    tea.status=true;                    // tea.status bcz Status is an instance variable of Tea Class, 
+  }                                     // and we can't access a non-static var. from a static method;
+  
+}
+
+
+
+
+
+public class KKFlavouredTea extends KKTea{
+  
+  public KKFlavouredTea(String name, int p, int b){
+    
+    super(name, p, b);
+  }
+  
+  public static void updateSoldStatusFlavoured (KKFlavouredTea tea){
+    
+    total++;
+    flavourCount++;
+    tea.status=true;               //Status--> Instance var.
+  }
+  
+}
+
+
+
+
+
+                                            //Ungraded Task-01
+
+
+
+public class ScienceExam extends Exam{
+  
+  int partCount=2;
+  
+  String parts[]={"Maths","English",null, null,null};
+  
+  public ScienceExam(int mark, int time, String s1, String s2){
+    
+    super(mark);
+    this.time=time;
+    parts[partCount++]=s1;
+    parts[partCount++]=s2;
+  }
+  
+  public ScienceExam(int mark, int time, String s1, String s2, String s3){
+    
+    super(mark);
+    this.time=time;
+    parts[partCount++]=s1;
+    parts[partCount++]=s2;
+    parts[partCount++]=s3;
+  }
+  
+  
+  public String examSyllabus(){
+    String s="";
+    
+    for(int i=0; i<partCount; i++){
+      
+      if(i!=partCount-1){
+        s+=parts[i]+", ";
+      }
+      else{
+        s+=parts[i];
+      }
+    }
+    return s;
+  }
+  
+  public String examParts(){
+    
+    String s="";
+    int a=1;
+    
+    for(int i=0; i<partCount; i++){
+      
+      s+="Part "+(a++)+" - "+parts[i]+"\n";
+    }
+    return s;
+  }
+  
+  
+  public String toString(){
+    
+    String s;
+    
+    s="Marks: "+marks+" Time: "+time+" minutes Number of Parts: "+partCount;
+    
+    return s;
+  }
+  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
