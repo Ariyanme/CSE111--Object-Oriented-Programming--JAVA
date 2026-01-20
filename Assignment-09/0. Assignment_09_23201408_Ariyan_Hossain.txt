@@ -1,0 +1,384 @@
+                                         //Task-01 
+
+                                        //(a)
+public class Pokemon{
+  
+  String name;
+  
+  public Pokemon(String n){
+    name=n;
+  }
+  
+  public void attack(){
+    System.out.println(name+" attacks with a basic move!");
+  }
+  
+  public void attack(String n){
+    System.out.println(name+ " uses Thunderbolt!");
+  }
+  
+  public void attack(String n, int a){
+    System.out.println("Pokemon uses "+n+" with power "+a+"!");
+  }
+}
+
+                                     //(b)
+
+//Compile Time polymprphism is depicted using method overloading;
+
+
+
+
+                                           //Task-02
+
+public class Mango extends Fruit{
+  
+  public Mango(){
+    super(true, "Mango");
+  }
+  
+  public String toString(){
+    return "Mangos are bad for you";
+  }
+  
+}
+
+
+public class Jackfruit extends Fruit{
+  
+  public Jackfruit(){
+    super(false, "Jackfruit");
+  }
+  
+  public String toString(){
+    return "Jackfruits are good for you";
+  }
+  
+}
+
+
+
+
+                                //Task-03 
+
+public class CSEStudent extends Student{
+  
+  String msg;
+  
+  public CSEStudent(){
+    this.msg="I want to transfer to CSE";
+  }
+  
+  public String shout(){                  //we've to override bcz variables are scopeBased
+    return msg;                           //Otherwise msg var. from Parent class Student will be printed;
+  }
+}
+
+
+
+public class CSE111Student extends Student{
+  
+  String msg;
+  
+  public CSE111Student(){
+    this.msg="I love Java Programming";
+  }
+  
+  public String shout(){
+    return msg;
+  }
+  
+}
+
+
+
+
+                                       //Task-04 
+
+
+public class PlatinumCard extends CreditCard {
+  
+  public PlatinumCard (String name, String num){
+    
+    super(name, num, 100);
+  }
+  
+  public void spendCash(int a){
+    
+    System.out.println("Previous Reward Points: "+rewardPoints);
+    rewardPoints+=(a/100)*2;
+    System.out.println("Reward points after spending "+a+" taka: "+rewardPoints);
+  }
+  
+}
+
+
+
+public class SignatureCard extends CreditCard{
+  
+  int companion;
+  
+  public SignatureCard (String name, String num){
+    
+    super(name, num, 200);
+    companion=5;
+  }
+  
+  public void spendCash(int a){
+    
+    System.out.println("Previous Reward Points: "+rewardPoints);
+    rewardPoints+=(a/100)*4;
+    System.out.println("Reward points after spending "+a+" taka: "+rewardPoints);
+  }
+  
+  
+  public void cardDetails(){
+    
+    super.cardDetails();
+    System.out.println("Possible Number of Companions for Lounge: "+companion);
+  }
+  
+}
+
+
+
+
+                                  //Task-05 
+
+
+public class Warrior extends Character{
+  
+  public Warrior (String n, int l){
+    super(n,l);
+  }
+  
+  public void specialMove(){
+    System.out.println(name+" performs a heavy sword slash!");
+  }
+  
+}
+
+
+
+public class Paladin extends Warrior{
+  
+  public Paladin(String n, int l){
+    super(n, l);
+  }
+  
+  public void specialMove(){
+    System.out.println(name+" unleashes a holy strike!");
+  }
+  
+}
+
+
+
+public class Mage extends Character{
+  
+  public Mage(String n, int l){
+    super(n, l);
+  }
+  
+  public void specialMove(){
+    System.out.println(name+" casts a powerful fireball!");
+  }
+  
+}
+
+
+// Overriding the equals() method in the parent class Character;
+
+public class Character {
+  public String name;
+  public int level;
+  
+  public Character(String name, int level) {
+    this.name = name;
+    this.level = level;
+  }
+  
+  public void specialMove() {
+    System.out.println("Character uses a generic move.");
+  }
+  
+  // Override the .equals() method
+  
+  public boolean equals(Character c){
+    
+    if(c instanceof Warrior){
+      if(c.level== this.level){
+        return true;
+      }
+      else{                            //We can also use String as Return Type instead of Boolean;
+        return false;
+      }
+    }
+    else if( c instanceof Mage){
+      if(c.level==this.level){
+        return true;
+      }
+      else{
+        return false;
+      }
+    }
+    else{
+      return false;
+    }
+    
+  }
+  
+}
+
+
+
+
+
+                                    //Task-06 
+
+
+public class Car extends Vehicle {
+  
+  String model;
+  int doors;
+  boolean ai;
+  
+  public Car(String brand, String model, int year, int doors, int wheels, boolean boo){
+    
+    super(brand, year);
+    setWheels(wheels);
+    this.model=model;
+    this.doors=doors;
+    ai=boo;
+  }
+  
+  public String toString(){
+    
+    return "Car "+super.toString()+", Model: "+model+", Doors: "+doors+", AI: "+ai ;
+  }
+  
+  
+  public void startAutoPilot(){
+    if(this.ai){
+      System.out.println(getBrand()+":"+model+" AutoPilot Started");
+    }
+    else{
+      System.out.println(this.getBrand()+":"+model+" has NO AutoPilot");
+    }
+  }
+  
+}
+
+
+
+
+public class Bike extends Vehicle{
+  
+  String model;
+  boolean sidecar;
+  
+  public Bike(String brand, String model, int year, int wheels, boolean boo){
+    
+    super(brand, year);
+    setWheels(wheels);
+    this.model=model;
+    sidecar=boo;
+  }
+  
+  public String toString(){
+    
+    return "Bike "+super.toString()+ ", Model: "+model+", SideCar: "+sidecar ;
+  }
+  
+  public void doAWheelie(){
+    
+    if( !sidecar ){
+      System.out.println( getBrand()+ ":"+model+" is doing Wheelie!!");
+    }
+    else{
+      System.out.println( "Wheelie Failed. "+getBrand()+ ":"+model+" has SideCar");
+    }
+  }
+  
+}
+
+
+
+
+
+public class Garage{
+  
+  public Car cars[];
+  public Bike bikes[];
+  int carCap;
+  int bikeCap;
+  int carCount;
+  int bikeCount;
+  
+  public Garage(int c, int b){
+    System.out.println("Welcome to the Garage!");
+    
+    carCap=c;
+    bikeCap=b;
+    
+    cars= new Car[carCap];
+    bikes= new Bike[bikeCap];
+    
+    System.out.println("Car Capacity: "+carCap+"\nBike Capacity: "+bikeCap);
+  }
+  
+  
+  public void addVehicle(Vehicle v){
+    
+    if( v instanceof Car){
+      
+      Car c=(Car)v;                  //Downcasting;
+      
+      if(carCount< carCap){
+        
+        cars[carCount++]=c;
+        System.out.println("A "+c.getBrand()+" CAR has been added to the Garage");
+      }
+      else{
+        System.out.println("Can't add more Cars! Capacity: "+carCap);
+      }
+    }
+    
+    else if( v instanceof Bike){
+      Bike b=(Bike)v;                //DownCasting 
+      
+      if(bikeCount< bikeCap){
+        
+        bikes[bikeCount++]=b;
+        System.out.println("A "+ b.getBrand()+ " BIKE has been added to the Garage");
+      }
+      else{
+        System.out.println("Can't add more bikes! Capacity: "+bikeCap);
+      }
+    }
+  }
+  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
