@@ -1,0 +1,285 @@
+                                          //Task-01
+
+public class Song {
+  
+  public String title;
+  public String artist;
+  public int length;
+  public Song next;
+  
+  public Song(String t, String a, int l){
+    title=t;
+    artist=a;
+    length=l;
+  }
+  
+  public void songInfo(){
+    System.out.println("Title: "+title+", Artist: "+artist+"\nLength: "+length+" minutes");
+  }
+}
+
+
+                         
+
+                                        //Task-02
+
+public class Playlist{
+  
+  public String name;
+  public int count=3;          //I've set Counter=3 bcz there were already three songs manually added in the driver code;
+  public Song start;
+  
+  public Song history;        //this var. stores the references of played songs;
+  
+  
+  
+  public Playlist(String n){
+    name=n;
+    System.out.println(name+" created.");
+    
+  }
+  
+                                        //Task-03
+   
+  
+  public void info(){
+    System.out.println(name+" has the following songs: ");
+    
+    if(start==null){
+      System.out.println("No songs in First Playlist.");
+    }
+    else{
+      
+      Song temp=start;
+      int count=1;
+      
+      while(temp!=null){
+        
+        System.out.println("Song-"+count);
+        temp.songInfo();
+        temp=temp.next;
+        count++;
+      }
+    }
+  }
+  
+                                            //Task-04
+  
+  
+  public void addSong(Song s){
+    
+    if(start==null){
+      start=s;
+    }
+    else{
+      Song temp=start;
+      
+      while(temp.next!=null){
+        temp=temp.next; 
+      }
+      temp.next=s;
+    }
+    
+    System.out.println( s.title+" added to "+name );
+    count++;
+  }
+  
+  
+                                          //Task=05
+  
+  
+  public void addSong(Song s, int index){
+    
+    if(index<0 || index>count){
+      System.out.println("Can not add song to Index"+ index);
+      return;
+    }
+    
+    if(index==0){               
+      s.next=start;
+      start=s;
+    }
+    else{
+      Song temp= start;
+      
+      for(int i=0;i<index-1;i++){
+        temp=temp.next;
+      }
+      
+      s.next=temp.next;
+      temp.next=s;
+      
+    }
+    System.out.println(s.title+" added to "+ this.name);
+    count++;
+  }
+  
+                                           //Task-06
+  
+  
+  public void playSong(String song){
+    Song temp=start;
+    boolean flag=false;
+    
+    while(temp!=null){
+      
+      if(temp.title.equals(song)){
+        
+        flag=true;
+        Add_song_To_History(temp);            //for adding song to History
+        
+        break;
+      }
+      temp=temp.next;
+    }
+    if(flag){
+      System.out.println("Playing "+temp.title+" by "+ temp.artist);
+    }
+    else{
+      System.out.println( song + " not found in "+name);
+    }
+  }
+  
+  
+  
+                                         //Task-07
+  
+  
+  public void playSong(int idx){
+    
+    Song temp=start;
+    int index=0;
+    
+    while(temp!=null && idx<this.count){
+      if(idx==index){
+        System.out.println("Playing "+ temp.title +" by "+ temp.artist);
+        
+        Add_song_To_History(temp);        //for adding song to History
+        
+        return;
+      }
+      temp=temp.next;
+      index++;
+    }
+    System.out.println("Song at Index "+idx+" not found in "+name);
+  }
+  
+  
+  
+                                           //Task-08
+  
+  
+  
+  public void deleteSong(String song){
+    
+    boolean flag=false;
+    
+    if(start.title.equals(song)){
+      start=start.next;
+      flag=true;
+    }
+    else{
+      
+      Song temp=start;
+      Song previous= null;
+      
+      while(temp!=null){
+        if(temp.title.equals(song)){
+          previous.next=temp.next;
+          flag=true;
+          break;
+        }
+        previous=temp;
+        temp=temp.next;
+      }
+    }
+    
+    if(flag){
+      System.out.println(song+" deleted from "+name);
+    }
+    else{
+      System.out.println(song+" not found in "+name);
+    }
+  }
+  
+  
+                                             //Task-09
+  
+  
+  public int totalSong(){
+    
+    Song temp=start;
+    int count=0;
+    
+    while(temp!=null){
+      temp=temp.next;
+      count++;
+    }
+    
+    return count;
+  }
+  
+  
+                                           //Task-10
+  
+  
+  public void merge(Playlist p){
+    
+    Song temp=start;
+    
+    while(temp.next!=null){
+      temp=temp.next;
+    }
+    temp.next=p.start;
+    
+    System.out.println("Merge Completed!");
+  }
+  
+  
+                                        //Task-11 (Ungraded)
+  
+  
+  
+  public void showHistory(){
+    
+    System.out.println("History of "+name+":");
+    
+    if(history==null){
+      System.out.println("No songs played in "+name);
+    }
+    else{
+      Song temp=history;
+      
+      while(temp!=null){
+        temp.songInfo();
+        temp=temp.next;
+      }
+    }
+  }
+  
+  public void Add_song_To_History(Song song){                       
+    
+    Song music= new Song(song.title, song.artist, song.length);      //Created a new song object to store the played songs;
+    
+    if(history==null){
+      history=music;
+    }
+    else{
+      Song temp=history;
+      
+      while(temp.next!=null){
+        temp=temp.next;
+      }
+      temp.next=music;
+    }
+  }
+}
+  
+      
+    
+
+  
+
+
+
+

@@ -1,0 +1,670 @@
+//Task-01
+
+
+public class BankAccount{
+  int ac;
+  String type="Not Set";
+  
+  public void setInfo(int ac, String s){
+    type=s;
+    this.ac=ac;
+    System.out.println("Account information updated!");
+  }
+  
+  public String printDetails(){
+    String output= "Acccount No: "+this.ac+"\nType: "+this.type;
+    return output;
+  }
+}
+
+
+
+
+
+//Task-02;
+
+public class Shape{
+  String name;
+  double area;
+  
+  public void setParameters(String s1, int n){        //for circle;
+    name=s1;
+    area=Math.PI*n*n;
+  }
+  
+  public void setParameters(String s1, int m, int n){       //for triangle;
+    name=s1;
+    area=0.5*m*n;
+  }
+  
+  public void setParameters(String s1, double m, double n){      //for rectangle;
+    name=s1;
+    area=m*n;
+  }
+  
+  public String details(){
+    return "Shape Name: "+name+"\nArea: "+String.format("%.2f",area);
+  }
+}
+
+
+
+
+//Task-03
+
+
+public class Shelf{
+  int capacity;
+  int count;
+  
+  public void addBooks(int n){
+    count+=n;
+    
+    if(capacity==0){
+      System.out.println("Zero capacity. Cannot add books.");
+      count-=n;
+    }
+    else if(count>capacity){
+      System.out.println("Exceeds capacity");
+      count-=n;
+    }
+    else{
+      System.out.println(n+" books added to shelf.");
+    }
+  }
+  
+  public void showDetails(){
+    System.out.println("Shelf capacity: "+capacity+"\nNumber of books: "+count);
+  }
+}
+
+      
+      
+      
+    
+
+//Task-04
+
+public class Student{
+  String name="Not Set";
+  String dept="CSE";
+  double cg;
+  int credit=9;
+  String status="Not Set";
+  
+  public void updateDetails(String nm, double cg, int cr){
+    name=nm; 
+    this.cg=cg;
+    credit=cr;
+  }
+  
+  public void updateDetails(String nm, double cg){
+    name=nm;
+    this.cg=cg;
+  }
+  
+  public void updateDetails(String nm, double cg, int cr, String dept){
+    name=nm;
+    this.cg=cg;
+    credit=cr;
+    this.dept=dept;
+  }
+  public void checkScholarshipEligibility(){
+    if(cg>=3.5 && credit>10){
+      if(cg>=3.5 && cg<3.7){
+        status="Need based scholarship";
+      }
+      else{
+        status="Merit based scholarship";
+      }
+      System.out.println(name+" is eligible for "+status);
+    }
+    else{
+      status="No Scholarship";
+      System.out.println(name+" is not eligible for Scholarship");
+    }
+  }
+  
+  public void showDetails(){
+    String output="Name: "+name+"\nDepartment: "+dept+"\nCGPA: "+cg+"\nCredits: "+credit+"\nScholarship Status: "+status;
+    System.out.println(output);
+  }
+}
+
+
+    
+      
+ 
+//Task-05
+
+public class Library{
+  int cap;
+  int count;
+  String list[];
+  
+  public void setBookCapacity(int n){
+    cap=n;
+    list=new String[cap];
+  }
+  
+  public void addBook(String nm){
+    if(count>=cap){
+      System.out.println("Exceeds maximum capacity. You can't add more than "+cap+" books");
+    }
+    else{
+      list[count]=nm;
+      count++;
+      System.out.println("Book '"+nm+"' added to the library");
+    }
+  }
+  
+  public void printDetail(){
+    System.out.println("Maximum Capacity: "+cap+"\nTotal Books: "+count+"\nBook list: ");
+    
+    for(int i=0; i<count; i++){
+      if(list[i]!=null){
+        System.out.println(list[i]);
+      }
+    }
+  }
+}
+
+     
+      
+ 
+  
+//Task-06
+
+public class TaxiLagbe{
+  String num;
+  String area;
+  int pcount;
+  String list[]=new String[4];
+  int fare;
+  
+  public void storeInfo(String num, String area){
+    this.num=num;
+    this.area=area;
+  }
+  
+  public void addPassenger(String nm, int fare){
+    
+    if(pcount<4){                                  //Ekhane <= dile list[] out of bounds hoye jay; watchout nextTime *_* 
+      this.fare+=fare;
+      list[pcount]=nm;                             //Alternative way: list[4] not possible;
+      pcount++;
+      System.out.println("Dear "+nm+"! Welcome to TaxiLagbe");
+    }
+    else{
+      System.out.println("Taxi Full! No more passengers can be added");
+    }
+  }
+  
+  public void addPassenger(String nm1, int f1, String nm2, int f2){
+    addPassenger(nm1, f1);
+    addPassenger(nm2, f2);
+  }
+  
+  public void printDetails(){
+    String output="Taxi number: "+num+"\nThis taxi can cover "+area+" area"+"\nTotal Passenger: "+pcount+"\nPassenger Lists: ";
+    System.out.println(output);
+    
+    for(int i=0; i<pcount; i++){
+      if(list[i]!=null){
+        System.out.print(list[i]+" ");
+      }
+    }
+    System.out.println("\nTotal collected fare: "+fare+" Taka");
+  }
+}
+
+
+
+
+
+//Task-07
+
+
+
+public class Cart{
+  int num;
+  int count;
+  String items[]=new String[3];
+  double prices[]=new double[3];
+  double total;
+  double dis;
+  
+  public void create_cart(int n){
+    num=n;
+  }
+  
+  public void addItem(String i, double p){
+    if(count<3){
+      items[count]=i;
+      prices[count]=p;
+      count++;
+      total+=p;
+      System.out.println(i+" added to cart "+num);
+      System.out.println("You have "+count+" item(s) in your cart now.");
+    }
+    else{
+      System.out.println("You already have "+count+" items on your cart");
+    }
+  }
+  
+  public void addItem(double p, String i){
+    addItem(i,p);
+  }
+  
+  public void giveDiscount(int n){
+    dis=n;
+    total=total-(total*(dis/100));
+  }
+  
+  public void cartDetails(){
+    System.out.println("Your cart(c"+num+") :");
+    
+    for(int i=0; i<count; i++){
+      if(items[i]!=null){
+        System.out.println(items[i]+" - "+prices[i]);
+      }
+    }
+    System.out.println("Discount Applied: "+dis+"%");
+    System.out.println("Total price: "+total);
+  }
+}
+
+
+
+
+
+
+//Task-08
+
+
+
+public class Reader{
+  String name="New user";
+  int cap;
+  String list[];
+  int count;
+  
+  public String createReader(String nm, int i){
+    name=nm;
+    cap=i;
+    list=new String[cap];
+    return "A new reader is created!";
+  }
+  
+  public void addBook(String book){
+    if(count<cap){
+      list[count]=book;
+      count++;
+    }
+    else{
+      System.out.println("No more capacity");
+    }
+  }
+  
+  public void readerInfo(){
+    System.out.println("Name: "+name+"\nCapacity: "+cap+"\nBooks: ");
+    
+    if(count==0){
+      System.out.println("No books added yet");
+    }
+    else{
+      for(int i=0; i<count; i++){
+        if(list[i]!=null){
+          System.out.println("Book "+(i+1)+": "+list[i]);
+        }
+      }
+    }
+  }
+}
+
+
+
+
+
+
+                                                                                         UNGRADED Tasks:
+
+
+
+
+//Ungraded Task-01
+
+
+public class MoneyTracker{
+  String name;
+  double balance;
+  double add;
+  double spent;
+  
+  public void createTracker(String nm){
+    name=nm;
+    balance=1;
+    
+  }
+  
+  public void income(double a){
+    balance+=a;
+    add=a;
+    System.out.println("Balance Updated!");
+  }
+  
+  public String info(){
+    
+    return "Name: "+name+"\nCurrent Balance: "+balance;
+  }
+  
+  public void expense(double a){
+    balance-=a;
+    
+    if(balance==0){
+      System.out.println("You're broke!");
+    }
+    else if(balance<0){
+      balance+=a;
+      System.out.println("Not enough balance.");
+    }
+    else{
+      System.out.println("Balance Updated!");    //Catch: the last spent money is stored only when the balance updates; 
+      spent=a;
+    }
+  }
+  
+  public void showHistory(){
+    System.out.println("Last added: "+add);
+    System.out.println("Last spent: "+spent);
+  }
+}
+
+
+
+
+
+
+
+// Ungraded Task-04 
+
+public class Customer{
+  String name;
+  String item[]=new String[4];
+  int price[]=new int[4];
+  int count;
+  int total;
+  boolean flag=false;
+  
+  public void createCustomer(String nm){
+    name=nm;
+  }
+  
+  public void addItem(String i, int p){
+    boolean flag2=true;
+    if(count<4){
+      item[count]=i;
+      price[count]=p;
+      count++;
+      total+=p;
+    }
+    else{
+      System.out.println("Cart is full");
+      flag2=false;
+    }
+                                                      //flag checks if it is from the other method; 
+    if(flag==false && flag2==true){                   //flag2 checks if the "cart is full", if it is full then the "added" msg doesnt print;
+      System.out.println(i+" added to cart");
+    }
+  }
+  
+  
+  public void addItem(String i1, int p1, String i2, int p2){
+    
+    flag=true;
+    
+    addItem(i1, p1);
+    addItem(i2, p2);
+    System.out.println(i1+" and "+i2+" added to cart");
+    
+    flag=false;
+  }
+  
+  
+  public void showCart(){
+    System.out.println("Customer Name: "+name);
+    
+    for(int i=0; i<count; i++){
+      if(item[i]!=null){
+        System.out.println("Item: "+item[i]+" Price: "+price[i]);
+      }
+    }
+  }
+  
+  public void calculatePrice(){
+    System.out.println("Total: "+total);
+  }
+}
+
+
+
+//Ungraded Task-05
+
+public class Calculator{
+  
+  public void add(int a, int b){
+    System.out.println(a+b);
+  }
+  
+  public void add(int a, int b, int c){
+    System.out.println(a+b+c);
+  }
+  
+  public void multiply(int a, int b){
+    System.out.println(a*b);
+  }
+  
+  public void multiply(int a, int b, int c){
+    System.out.println(a*b*c);
+  }
+  
+  public void multiply(String s, int a){
+    String result=s;
+    
+    for(int i=1; i<a; i++){
+      result+="-"+s;
+    }
+    System.out.println(result);
+  }
+}
+
+
+
+
+//Ungraded Task-06
+
+
+
+public class Book{
+  String title;
+  String author="Unknown";
+  String genre;
+  int pages;
+  
+  public void createBook(String t){
+    title=t;
+  }
+  
+  public void createBook(String t, String a){
+    title=t;
+    author=a;
+  }
+  
+  public void createBook(String t, String a, String g){
+    title=t;
+    author=a;
+    genre=g;
+  }
+  
+  public void customizeGenre(String g){
+    genre=g;
+    System.out.println("Updated genre of '"+title+"' to "+genre);
+  }
+  
+  public void customizePages(int a){
+    pages=a;
+    System.out.println("Updated pages of '"+title+"' to "+pages+" pages.");
+  }
+  
+  public void displayDetails(){
+    System.out.println("Title: "+title+", Author: "+author+", Genre: "+genre+", Pages: "+pages);
+  }
+}
+
+
+
+
+//Ungraded Task-07
+
+
+
+public class Movie{
+  
+  String title;
+  String director;
+  double rating;
+  String actors[]=new String [3];
+  int count;
+  public void addActors(String s){
+    actors[count]=s;
+    count++;
+    System.out.println("Added actor '"+s+"' to '"+title+"'.");
+  }
+  
+  public void addActors(String s1, String s2){
+    addActors(s1);
+    addActors(s2);
+  }
+  
+  public void addActors(String s1, String s2, String s3){
+    addActors(s1);
+    addActors(s2);
+    addActors(s3);
+  }
+  
+  public void setMovieDetails(String t, String d, double r){
+    title=t;
+    director=d;
+    rating=r;
+  }
+  
+  public void setMovieDetails(String t, String d){
+    title=t;
+    director=d;
+  }
+  
+  public void updateRating(double r){
+    rating =r;
+    System.out.println("Updated rating of '"+title+"' to "+rating);
+  }
+  
+  public void showInfo(){
+    System.out.println("Title: "+title+"\nDirector: "+director+"\nRating: "+rating);
+    System.out.print("Actors: ");
+    for(int i=0; i<count; i++){
+      if(actors[i]!=null && i==count-1){
+        System.out.print(actors[i]);
+      }
+      else{
+        System.out.print(actors[i]+", ");
+      }
+    }
+    System.out.println();
+  }
+}
+
+
+
+
+
+//Ungraded Task-08
+
+
+public class Course{
+  String name;
+  String code;
+  String list[]=new String[4];
+  int count;
+  
+  public void updateDetails(String nm, String c){
+    name=nm;
+    code=c;
+  }
+  
+  public void addContent(String c){
+    
+    if(count<4){
+      list[count]=c;
+      count++;
+      System.out.println(c+" was added.");
+    }
+    else{
+      System.out.println("Cannot add more content");
+    }
+  }
+  
+  public void addContent(String c1, String c2){
+    addContent(c1);
+    addContent(c2);
+  }
+  
+  public void printDetails(){
+    System.out.println("Course details:");
+    System.out.println("Course Name: "+name+"\nCourse Code: "+code+"\nCourse Syllabus:");
+    
+    for(int i=0; i<count; i++){
+      
+      if(i==count-1){
+        System.out.print(list[i]+"\n");
+      }
+      else{
+        System.out.print(list[i]+", ");
+      }
+    }
+    if(count==0){
+      System.out.println("No content yet");
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
